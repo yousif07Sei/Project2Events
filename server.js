@@ -26,10 +26,14 @@ app.use(express.urlencoded({ extended: true }));
 // Import Routes
 const indexRouter = require("./routes/index");
 const eventRouter = require("./routes/event");
+const categoryRouter = require("./routes/category")
 
 
 //------- Mount routes -------//
 app.use("/", indexRouter);
+app.use("/event", eventRouter);
+app.use("/category", categoryRouter);
+
 
 // link you static folder i.e. images, css 
 app.use(express.static('public'));

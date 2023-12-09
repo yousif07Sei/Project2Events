@@ -8,7 +8,7 @@ const eventSchema = mongoose.Schema({
     time: String,
     image: String,
     location: String,
-    categorie: String
+    category: String
 },{
     timestamps: true
 });
