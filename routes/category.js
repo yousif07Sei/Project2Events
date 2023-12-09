@@ -5,3 +5,8 @@ const router = express.Router();
 // Require category controller
 const categoryCtrl = require('../controllers/category');
 router.use(express.urlencoded({extended: true}));
+
+
+
+
+module.exports = router;
