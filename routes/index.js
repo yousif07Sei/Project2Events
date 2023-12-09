@@ -3,6 +3,8 @@ const express = require('express');
 // Initialize router functionality from express framework.
 const router = express.Router();
 // Require index controller
-const eventCtrl = require('../controllers/event');
+const indexCtrl = require('../controllers/index');
 
-// router.get('/', eventCtrl.event_index_get);
+router.get('/', indexCtrl.index_get);
+
+module.exports = router;
