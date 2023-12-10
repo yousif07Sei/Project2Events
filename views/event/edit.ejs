@@ -1,0 +1,45 @@
+<h1> Edit Event </h1>
+
+<form method="POST" action="/event/update">
+    <div>
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" value="<%= event.name  %>" />
+    </div>
+       <label>Description</label>
+      <input type="text" name="description" class="form-control" value="<%=event.description %>" />
+    <div>
+      
+    </div>
+  
+    <div>
+      <label>Start Date</label>
+      <input type="date" name="startDate" class="form-control" value="<%= dayjs(event.startDate).format('MM/DD/YYYY')  %>" />
+    </div>
+  
+    <div>
+      <label>End Date</label>
+      <input type="date" name="endDate" class="form-control" value="<%=event.endDate  %>" />
+    </div>
+  
+    <div>
+      <label>time</label>
+      <input type="time" name="time" class="form-control" value="<%=event.time  %>" />
+    </div>
+
+    <div>
+        <label>Image</label>
+        <input type="text" name="image" class="form-control" value="<%=event.image  %>" />
+    </div>
+
+    <div>
+        <label>Location</label>
+        <input type="text" name="location" class="form-control" value="<%=event.location  %>" />
+    </div>
+   
+    <div>
+        <label>Category</label>
+        <input type="text" name="category" class="form-control" value="<%=event.category  %>" />
+    </div>
+    <input type="hidden" name="id" value="<%= event._id  %>"/>
+    <button type="submit" class="btn btn-primary">Update Event</button>
+  </form>
