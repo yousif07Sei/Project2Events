@@ -2,10 +2,10 @@
 const express = require('express');
 // Initialize router functionality from express framework.
 const router = express.Router();
-// Require event controller
-const eventCtrl = require('../controllers/event');
-router.use(express.urlencoded({extended: true}));
+// Require index controller
+const indexCtrl = require('../controllers/index');
 
+router.get('/', indexCtrl.index_get);
 
 
 

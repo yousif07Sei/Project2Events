@@ -22,16 +22,21 @@ app.use(expressLayout);
 // to encode req.body - make form data readable in controllers
 app.use(express.urlencoded({ extended: true }));
 
-// link you static folder i.e. images, css 
-app.use(express.static('public'));
-//-------------------------//
+
+// Import Routes
+const indexRouter = require("./routes/index");
+const eventRouter = require("./routes/event");
+const categoryRouter = require("./routes/category")
 
 
 //------- Mount routes -------//
-// Your code goes here
+app.use("/", indexRouter);
+app.use("/event", eventRouter);
+app.use("/category", categoryRouter);
 
 
-//-------------------------//
+// link you static folder i.e. images, css 
+app.use(express.static('public'));
 
 // start listening to requests coming from the PORT
 app.listen(port, () => console.log(`Server is running on http://localhost:${port}`))
