@@ -15,9 +15,11 @@
 
     <nav>
         <% if(user){ %>
+            <a class="" href="/logout">Logout</a>
+            <%if (user.type == "admin"){%>
+
         <a href="/category/add">Add</a>
-        <a class="" href="/logout">Logout</a>
-        <% }else{ %>
+        <% }}else{ %>
             <a href="/auth/google">Login</a>
             <% } %>
     </nav>

@@ -2,7 +2,14 @@ const mongoose = require('mongoose');
 
 const reviewSchema = mongoose.Schema({
     comment: String,
-    user: String
+    user: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    event: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event'
+    }]
 },{
     timestamps: true
 })
