@@ -8,7 +8,15 @@
     <title>Events App</title>
 </head>
 <body>
-    <a href="/category/add">Add</a>
+    <nav>
+        <% if(user){ %>
+        <a href="/category/add">Add</a>
+        <a class="" href="/logout">Logout</a>
+        <% }else{ %>
+            <a href="/auth/google">Login</a>
+            <% } %>
+    </nav>
+
     <hr>
         <%- body %>
     <hr>

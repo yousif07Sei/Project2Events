@@ -2,6 +2,8 @@
 // Require dependencies
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
+const passport = require('passport');
+const session = require('express-session');
 require('dotenv').config()
 
 // connect to mongoDB
@@ -22,7 +24,21 @@ app.use(expressLayout);
 // to encode req.body - make form data readable in controllers
 app.use(express.urlencoded({ extended: true }));
 
+// Passport configuraion
+require('./config/passport');
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) =>{
+    //res.locals will be sent with all requests
+    res.locals.user = req.user;
+    next();
+})
 // Import Routes
 const indexRouter = require("./routes/index");
 const eventRouter = require("./routes/event");
