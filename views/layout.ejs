@@ -12,6 +12,16 @@
     <a href="/category/add">Add Category</a>
     <a href="/event/index">Events</a>
     <a href="/event/add">Add Event</a>
+
+    <nav>
+        <% if(user){ %>
+        <a href="/category/add">Add</a>
+        <a class="" href="/logout">Logout</a>
+        <% }else{ %>
+            <a href="/auth/google">Login</a>
+            <% } %>
+    </nav>
+
     <hr>
         <%- body %>
     <hr>
