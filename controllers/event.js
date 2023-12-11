@@ -16,13 +16,15 @@ exports.event_create_get = (req, res)=>{
 
 }
 exports.event_create_post = (req, res)=>{
+    console.log(req.body);
     let event = new Event(req.body)
+
     event.save()
     .then(() => {
         req.body.category.forEach(category => {
             Category.findById(category)
             .then((category) => {
-                category.event.push(category);
+                category.event.push(event);
                 category.save();
             })
             .catch((err) => {
@@ -49,14 +51,16 @@ exports.events_index_get = (req, res)=>{
 }
 
 exports.event_show_get = (req, res)=>{
+    console.log(req.query.id);
     Event.findById(req.query.id).populate('category')
-    .then((event)=>{
-        res.redirect('event/detail', {event})
+    .then((event) => {
+        res.render('event/detail', {event})
     })
-    .catch((err)=>{
-        console.log(err)
+    .catch((err) => {
+        console.log(err);
     })
 }
+
 exports.event_delete_get = (req, res)=>{
     Event.findByIdAndDelete(req.query.id)
     .then(()=>{

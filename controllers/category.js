@@ -28,8 +28,10 @@ exports.category_index_get = (req, res) => {
 
 exports.category_show_get = (req, res) => {
     console.log(req.query.id);
+  
     Category.findById(req.query.id).populate('event')
     .then((category) => {
+        console.log(category)
         res.render('category/detail', {category})
     })
     .catch((err) => {
