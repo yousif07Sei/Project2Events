@@ -5,11 +5,11 @@
 </div>
 
 <div>
-    Start Date: <%= event.startDate  %>
+    Start Date: <%= dayjs(event.startDate).format('MM/DD/YYYY') %>
 </div>
 
 <div>
-    End Date: <%= event.endDate  %>
+    End Date: <%= dayjs(event.EndDate).format('MM/DD/YYYY') %>
 </div>
 
 <div>
@@ -29,20 +29,28 @@
 </div>
 <br>
 <% let count = 0;
+// If the review for this event is not empty 
 if(review.length != 0){ %>
 <h4>Reviews</h4>
 <% review.forEach(review =>{ 
+    // The loop is to go for all users in this review page and if the user have written a review he can edit or delete the review
     review.user.forEach(reviewUser =>{ %>
         <%= reviewUser.name %> <br>
-        <%if(user){%>
+        <%
+        // If the user is logged in
+        if(user){%> 
             <%if(reviewUser._id.toString() === user._id.toString()){
-                count++%>
-            <form action="">
+                count++
+                // The form to edit or delete the review if he user has one
+
+                %>
+            <form method="POST" action="review/edit">
                 <input type="text" name="comment" value="<%= review.comment %>">
-                <button>Edit</button>
+                <input name="id" value="<%= review._id %>" type="hidden">
+                <button>Edit</button> 
             </form>
-            <form action="">
-                <input name="id" type="hidden">
+            <form method="POST" action="review/delete">
+                <input name="id" value="<%= review._id %>" type="hidden">
                 <button>Delete</button>
             </form>
         <% }else{ %>
@@ -52,7 +60,7 @@ if(review.length != 0){ %>
         <%= review.comment %> <hr>
         <% } %>
     <% }) %>
-<% }) 
+<% }) // If there is no reviews 
 }else{%>
 <h4>No Reviews</h4>
 <%if(user){
@@ -67,3 +75,12 @@ if(review.length != 0){ %>
 } %>
 
 
+<%if(user){
+    if(count == 0){%>
+    <form method="POST" action="review">
+    <input type="text" name="comment">
+    <input type="hidden" name="event" value="<%= event._id %>">
+    <input type="hidden" name="user" value="<%= user._id %>">
+    <button type="submit">Comment</button>
+</form>
+<%}}%>
