@@ -1,5 +1,8 @@
 const {Category} = require('../models/Category');
 const {Event} = require('../models/Event');
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 exports.category_add_get = (req, res) =>{
     res.render('category/add');
@@ -32,7 +35,7 @@ exports.category_show_get = (req, res) => {
     Category.findById(req.query.id).populate('event')
     .then((category) => {
         console.log(category)
-        res.render('category/detail', {category})
+        res.render('category/detail', {category, dayjs})
     })
     .catch((err) => {
         console.log(err);
