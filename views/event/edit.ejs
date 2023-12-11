@@ -13,12 +13,12 @@
   
     <div>
       <label>Start Date</label>
-      <input type="date" name="startDate" class="form-control" value="<%= dayjs(event.startDate).format('MM/DD/YYYY')  %>" />
+      <input type="date" name="startDate" class="form-control" value="<%= dayjs(event.startDate).format('YYYY-MM-DD')  %>" />
     </div>
   
     <div>
       <label>End Date</label>
-      <input type="date" name="endDate" class="form-control" value="<%=event.endDate  %>" />
+      <input type="date" name="endDate" class="form-control" value="<%= dayjs(event.EndDate).format('YYYY-MM-DD')  %>" />
     </div>
   
     <div>

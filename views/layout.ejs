@@ -8,20 +8,19 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Events App</title>
 </head>
-<body> <a href="/category/index">Categories</a>
-    <a href="/category/add">Add Category</a>
-    <a href="/event/index">Events</a>
-    <a href="/event/add">Add Event</a>
-
+<body> 
+    
     <nav>
         <% if(user){ %>
             <a class="" href="/logout">Logout</a>
             <%if (user.type == "admin"){%>
-
-        <a href="/category/add">Add</a>
-        <% }}else{ %>
+                <a href="/event/add">Add Event</a>
+                <a href="/category/add">Add Category</a>
+            <% }}else{ %>
             <a href="/auth/google">Login</a>
             <% } %>
+            <a href="/category/index">Categories</a>
+            <a href="/event/index">Events</a>        
     </nav>
 
     <hr>
