@@ -64,11 +64,11 @@ exports.event_show_get = (req, res)=>{
         console.log
         Review.find({event: req.query.id}).populate('user')
         .then((review)=>{
-            res.render('event/detail', {event, review})
+            res.render('event/detail', {event, review, dayjs})
         })
         .catch((err) =>{
             console.log(err);
-            res.render('event/detail', {event})
+            res.render('event/detail', {event, dayjs})
         })
     })
     .catch((err)=>{
@@ -124,3 +124,24 @@ exports.event_edit_post = (req, res)=>{
         })
     
     }
+
+exports.review_edit_post = (req, res) =>{
+    Review.findByIdAndUpdate(req.body.id, req.body)
+    .then(() =>{
+        res.redirect('/event/index');
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
+}
+
+exports.review_delete_post = (req, res) =>{
+    console.log(req.body.id);
+    Review.findByIdAndDelete(req.body.id)
+    .then(() =>{
+        res.redirect('/event/index');
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
+}

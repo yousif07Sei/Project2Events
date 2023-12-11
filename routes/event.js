@@ -13,6 +13,9 @@ router.get('/delete', eventCtrl.event_delete_get);
 router.get('/edit', eventCtrl.event_edit_get);
 router.post('/update', eventCtrl.event_edit_post);
 router.post('/review', eventCtrl.event_review_post);
+router.post('/review/edit', eventCtrl.review_edit_post);
+router.post('/review/delete', eventCtrl.review_delete_post);
+
 
 
 
