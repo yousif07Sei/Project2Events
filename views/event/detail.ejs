@@ -26,30 +26,53 @@
 
 <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
     Category: <%= event.category.map(c => c.name).join(', ')%>
 </div>
 =======
     Category: <%= event.category  %>
+=======
+    Category: <%= event.category.map(c => c.name).join(', ')  %>
+>>>>>>> b6b8829540d972aea023dc008e649e5edf98c97a
 </div>
 <br>
-<% if(review.length != 0){ %>
+<% let count = 0;
+if(review.length != 0){ %>
 <h4>Reviews</h4>
 <% review.forEach(review =>{ 
-    review.user.forEach(user =>{ %>
-        <%= user.name %> <br>
+    review.user.forEach(reviewUser =>{ %>
+        <%= reviewUser.name %> <br>
+        <%if(user){%>
+            <%if(reviewUser._id.toString() === user._id.toString()){
+                count++%>
+            <form action="">
+                <input type="text" name="comment" value="<%= review.comment %>">
+                <button>Edit</button>
+            </form>
+            <form action="">
+                <input name="id" type="hidden">
+                <button>Delete</button>
+            </form>
+        <% }else{ %>
+            <%= review.comment %> <hr>
+        <%}
+    }else{ %>
+        <%= review.comment %> <hr>
+        <% } %>
     <% }) %>
-    <%= review.comment %> <hr>
 <% }) 
 }else{%>
 <h4>No Reviews</h4>
-<% } %>
-<% if(user){ %>
-<form method="POST" action="review">
+<%if(user){
+    if(count == 0){%>
+    <form method="POST" action="review">
     <input type="text" name="comment">
     <input type="hidden" name="event" value="<%= event._id %>">
     <input type="hidden" name="user" value="<%= user._id %>">
     <button type="submit">Comment</button>
 </form>
-<% } %>
+<%}}
+} %>
+
 
 >>>>>>> 5d599fb1e787609a027e7ff484dcb12220676ab3
