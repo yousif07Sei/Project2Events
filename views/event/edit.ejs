@@ -38,7 +38,13 @@
    
     <div>
         <label>Category</label>
-        <input type="text" name="category" class="form-control" value="<%=event.category  %>" />
+        <select name="category[]" class="form-select" multiple>
+          <option>Select a Category</option>
+          <% categories.forEach(function(category) { %>
+            <% const isSelected = event.category.some(c => c.equals(category._id)); %>
+            <option value="<%= category._id %>" <%= isSelected ? 'selected' : '' %>><%= category.name %></option>
+          <% }); %>
+      </select>
     </div>
     <input type="hidden" name="id" value="<%= event._id  %>"/>
     <button type="submit" class="btn btn-primary">Update Event</button>

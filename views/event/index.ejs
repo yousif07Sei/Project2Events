@@ -32,6 +32,7 @@
             <td><%= event.time  %></td>
             <td><%= event.image  %></td>
             <td><%= event.location  %></td>
+            <td><%= event.category.map(c => c.name).join(', ')%></td>
             <td><%= event.category  %></td>
             <% if(user){
                 if(user.type == "admin"){
