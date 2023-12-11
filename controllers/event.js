@@ -1,6 +1,6 @@
 const {Category} = require('../models/Category');
-const {Event} = require('../models/Event');
-
+const {Event} = require('../models/Event')
+const {Review} = require('../models/Review')
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -48,15 +48,34 @@ exports.events_index_get = (req, res)=>{
 
 }
 
+// exports.event_show_get = (req, res)=>{
+//     Event.findById(req.query.id)
+//     .then((event)=>{
+//         res.render('event/detail', {event})
+//     })
+//     .catch((err)=>{
+//         console.log(err)
+//     })
+// }
+
 exports.event_show_get = (req, res)=>{
     Event.findById(req.query.id).populate('category')
     .then((event)=>{
-        res.redirect('event/detail', {event})
+        console.log
+        Review.find({event: req.query.id}).populate('user')
+        .then((review)=>{
+            res.render('event/detail', {event, review})
+        })
+        .catch((err) =>{
+            console.log(err);
+            res.render('event/detail', {event})
+        })
     })
     .catch((err)=>{
         console.log(err)
     })
 }
+
 exports.event_delete_get = (req, res)=>{
     Event.findByIdAndDelete(req.query.id)
     .then(()=>{
@@ -92,4 +111,16 @@ exports.event_edit_post = (req, res)=>{
     .catch((err)=>{
         console.log(err)
     })
-}
+    }
+
+    exports.event_review_post = (req, res) =>{
+        let review = new Review(req.body)
+        review.save()
+        .then(() =>{
+            res.redirect("/event/index")
+        })
+        .catch((err) =>{
+            console.log(err);
+        })
+    
+    }
