@@ -1,6 +1,6 @@
 const {Category} = require('../models/Category');
-const {Event} = require('../models/Event')
-const {Review} = require('../models/Review')
+const {Event} = require('../models/Event');
+
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -16,13 +16,15 @@ exports.event_create_get = (req, res)=>{
 
 }
 exports.event_create_post = (req, res)=>{
+    console.log(req.body);
     let event = new Event(req.body)
+
     event.save()
     .then(() => {
         req.body.category.forEach(category => {
             Category.findById(category)
             .then((category) => {
-                category.event.push(category);
+                category.event.push(event);
                 category.save();
             })
             .catch((err) => {
@@ -48,31 +50,14 @@ exports.events_index_get = (req, res)=>{
 
 }
 
-// exports.event_show_get = (req, res)=>{
-//     Event.findById(req.query.id)
-//     .then((event)=>{
-//         res.render('event/detail', {event})
-//     })
-//     .catch((err)=>{
-//         console.log(err)
-//     })
-// }
-
 exports.event_show_get = (req, res)=>{
+    console.log(req.query.id);
     Event.findById(req.query.id).populate('category')
-    .then((event)=>{
-        console.log
-        Review.find({event: req.query.id}).populate('user')
-        .then((review)=>{
-            res.render('event/detail', {event, review})
-        })
-        .catch((err) =>{
-            console.log(err);
-            res.render('event/detail', {event})
-        })
+    .then((event) => {
+        res.render('event/detail', {event})
     })
-    .catch((err)=>{
-        console.log(err)
+    .catch((err) => {
+        console.log(err);
     })
 }
 
@@ -111,16 +96,4 @@ exports.event_edit_post = (req, res)=>{
     .catch((err)=>{
         console.log(err)
     })
-    }
-
-    exports.event_review_post = (req, res) =>{
-        let review = new Review(req.body)
-        review.save()
-        .then(() =>{
-            res.redirect("/event/index")
-        })
-        .catch((err) =>{
-            console.log(err);
-        })
-    
-    }
+}
