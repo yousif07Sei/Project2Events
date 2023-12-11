@@ -2,6 +2,6 @@
 
 <ul>
     <% categories.forEach(function(category) {%>
-    <li><%= category.name %>  (<a href='/category/edit?id=<%= category._id %>'>Edit</a> | <a href="/category/delete?id=<%= category._id %>">Delete</a>)</li>
+    <li><a href="/category/detail?id=<%= category._id %>"> <%= category.name %> </a> (<a href='/category/edit?id=<%= category._id %>'>Edit</a> | <a href="/category/delete?id=<%= category._id %>">Delete</a>)</li>
     <% }); %>
 </ul>

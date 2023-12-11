@@ -1,4 +1,5 @@
 const {Category} = require('../models/Category');
+const {Event} = require('../models/Event');
 
 exports.category_add_get = (req, res) =>{
     res.render('category/add');
@@ -16,7 +17,7 @@ exports.category_add_post = (req, res) =>{
 }
 
 exports.category_index_get = (req, res) => {
-    Category.find()
+    Category.find().populate('event')
     .then((categories) => {
         res.render("category/index", {categories});
     })
@@ -27,7 +28,7 @@ exports.category_index_get = (req, res) => {
 
 exports.category_show_get = (req, res) => {
     console.log(req.query.id);
-    Category.findById(req.query.id)
+    Category.findById(req.query.id).populate('event')
     .then((category) => {
         res.render('category/detail', {category})
     })

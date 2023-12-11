@@ -8,7 +8,10 @@ const eventSchema = mongoose.Schema({
     time: String,
     image: String,
     location: String,
-    category: String
+    category: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
+    }],
 },{
     timestamps: true
 });
