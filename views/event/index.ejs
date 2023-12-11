@@ -28,7 +28,7 @@
             <td><%= event.time  %></td>
             <td><%= event.image  %></td>
             <td><%= event.location  %></td>
-            <td><%= event.category  %></td>
+            <td><%= event.category.map(c => c.name).join(', ')%></td>
             <td>created <%= dayjs(event.createdAt).fromNow(true) %> ago</td>
             <td>updated <%= dayjs(event.updated).fromNow(true) %> ago</td>
             <td><a href="/event/delete?id=<%= event._id %>" class="btn btn-danger bi bi-trash3"></a></td>

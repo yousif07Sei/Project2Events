@@ -1,0 +1,21 @@
+<div>
+    <div>
+        <h3><%= category.name %></h3>
+    </div>
+
+    <br>
+
+    <% category.event.forEach(function(event) {%>
+        <hr>
+        <div>
+            <div class="event">Event: <%= event.name %></div>
+            <div class="event">Description: <%= event.description %></div>
+            <div class="event">Start Date: <%= event.startDate %></div>
+            <div class="event">End Date: <%= event.endDate %></div>
+            <div class="event">Opening Time: <%= event.time %></div>
+            <div class="event">Location: <%= event.location %></div>
+
+        </div>
+    <% }); %>
+
+</div>

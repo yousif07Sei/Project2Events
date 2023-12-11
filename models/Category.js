@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const categorySchema = mongoose.Schema({
     name: String,
-    event: String
+    event: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event'
+    }],
 },{
     timestamps: true
 });
