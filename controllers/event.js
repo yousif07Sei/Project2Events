@@ -1,6 +1,7 @@
 const {Category} = require('../models/Category');
 const {Event} = require('../models/Event');
 const {Review} = require('../models/Review')
+const uploadCloudinary = require('../config/cloudinaryConfig');
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -15,9 +16,36 @@ exports.event_create_get = (req, res)=>{
   })
 
 }
-exports.event_create_post = (req, res)=>{
-    console.log(req.body);
+exports.event_create_post = async (req, res, next)=>{
+    // console.log(req.body);
+
     let event = new Event(req.body)
+    let images;
+    if (req.files) {
+        images = req.files.map(file => `public/images/${file.filename}`);
+    } else {
+        images = [];
+    }
+    // console.log(`/images/${req.file.filename}`);
+    // let cloudPath = `public/images/${req.file.filename}`
+    // uploadCloudinary.upload_single(cloudPath)
+    let pathDb = [];
+await uploadCloudinary.upload_multiple(images)
+    .then((imagesPath)=>{
+    //     console.log("this is the log from Cloud")
+    imagesPath.forEach(pathImg =>{
+        console.log(pathImg.url)
+        pathDb.push(pathImg.url);
+    })
+    console.log(pathDb)
+    event.image = pathDb;
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+   
+    
 
     event.save()
     .then(() => {
