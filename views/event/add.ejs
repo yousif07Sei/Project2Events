@@ -1,6 +1,6 @@
 <h1> Add Event </h1>
 
-<form method="POST" action="/event/add">
+<form method="POST" action="/event/add" enctype="multipart/form-data">
     <div>
       <label>Name</label>
       <input type="text" name="name" class="form-control" />
@@ -28,7 +28,7 @@
 
     <div>
         <label>Image</label>
-        <input type="text" name="image" class="form-control" />
+        <input type="file" name="image" class="form-control" accept="image/png, image/jpeg, image/jpg" multiple />
     </div>
 
     <div>
@@ -45,6 +45,6 @@
           <% }); %>
       </select>
     </div>
-  
+    
     <button type="submit" class="btn btn-primary">Create Event</button>
   </form>
