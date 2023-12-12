@@ -1,7 +1,28 @@
 <h1>Categories</h1>
 
-<ul>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <% categories.forEach(function(category) {%>
-    <li><a href="/category/detail?id=<%= category._id %>"> <%= category.name %> </a> (<a href='/category/edit?id=<%= category._id %>'>Edit</a> | <a href="/category/delete?id=<%= category._id %>">Delete</a>)</li>
+    <div class="col">
+      <div class="card shadow-sm">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        <div class="card-body">
+            <p class="card-text"><%= category.name %></p>
+            <% if (!user) { %>
+                <a href="/category/detail?id=<%= category._id %>"><button type="button" class="btn btn-outline-secondary w-100 ">View</button></a>
+                <% } %>
+            <div class="d-flex justify-content-between align-items-center">
+                <% if(user){
+                    if(user.type == "admin"){
+                %>
+                <div class="btn-group" role="group">
+                            <a href="/category/detail?id=<%= category._id %>"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                            <a href='/category/edit?id=<%= category._id %>'><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                    <a href="/category/delete?id=<%= category._id %>"><button class="btn btn-danger btn-sm bi bi-trash3"></button></a>
+                <% }} %>
+            </div>
+        </div>
+      </div>
+    </div>
     <% }); %>
-</ul>
+</div>
