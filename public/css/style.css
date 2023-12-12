@@ -3,9 +3,37 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     
   }
+
+  .navbar {
+
+  }
+
+  .home-view {
+    background-image: url('/images/Bahrain.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .trans-background {
+    background-color: rgba(0,0,0,0.37);
+    color: white;
+    background-size: cover;
+    /* height: 100%; */
+    /* margin-top: -40px; */
+  }
+
+  .trans-background-content {
+    text-shadow: 2px 2px rgba(0,0,0,0.5);
+  }
   
   a {
     color: #00B7FF;
+  }
+
+  .login {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
   }
   
   table {
