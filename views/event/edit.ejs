@@ -11,7 +11,8 @@
 
         <div class="col-12">
           <label for="description" class="form-label">Description</label>
-          <input type="text" name="description" class="form-control" id="description" value="<%=event.description %>">
+          <textarea name="description" class="form-control" id="description" cols="30" rows="10"><%=event.description %></textarea>
+          <!-- <input type="text" name="description" class="form-control" id="description" value="<%=event.description %>"> -->
         </div>
 
 
@@ -33,7 +34,7 @@
           <label>Current Event images:</label><br><br>
           <% for(let i = 0; i < event.image.length; i++) { %>
             <div>
-                <img src="<%= event.image[i] %>" alt="Current Event Image" width="100"><br><br>
+                <img src="<%= event.image[i] %>" alt="Current Event Image" width="200"><br><br>
             </div>
         <% } %>
         

@@ -55,7 +55,7 @@ if(review.length != 0){ %>
                 %>
                 <div class="">
     <form method="POST" action="review/edit">
-        <input type="text" name="comment" value="<%= review.comment %>">
+        <textarea name="comment" cols="30" ><%= review.comment %></textarea>
         <input name="id" value="<%= review._id %>" type="hidden">
         <input type="hidden" name="eventId" value="<%= event._id %>">
         <button class="btn btn-secondary">Edit</button> 
@@ -84,7 +84,7 @@ if(review.length != 0){ %>
 <%if(user){
     if(count != 0){%>
     <form method="POST" action="review">
-    <input type="text" name="comment">
+        <input type="text" name="comment">
     <input type="hidden" name="event" value="<%= event._id %>">
     <input type="hidden" name="user" value="<%= user._id %>">
     <button type="submit">Comment</button>
