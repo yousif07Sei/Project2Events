@@ -70,6 +70,12 @@ await uploadCloudinary.upload_multiple(images)
 exports.events_index_get = (req, res)=>{
     Event.find().populate('category')
     .then((events)=>{
+
+        // Create unique id's out of event name
+        for(let i=0; i<events.length;i++){
+            events[i]['eventName']=events[i]['name'].toLowerCase().replace(/[^a-z]/g,'')+i;
+        }
+
         res.render('event/index', {events, dayjs})
     })
     .catch((err)=>{
