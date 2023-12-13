@@ -136,8 +136,8 @@ exports.event_edit_post = (req, res)=>{
     exports.event_review_post = (req, res) =>{
         let review = new Review(req.body)
         review.save()
-        .then(() =>{
-            res.redirect("/event/index")
+        .then(() =>{ 
+            res.redirect("/event/detail?id="+req.body.event)
         })
         .catch((err) =>{
             console.log(err);
@@ -148,7 +148,7 @@ exports.event_edit_post = (req, res)=>{
 exports.review_edit_post = (req, res) =>{
     Review.findByIdAndUpdate(req.body.id, req.body)
     .then(() =>{
-        res.redirect('/event/index');
+        res.redirect("/event/detail?id="+req.body.eventId)
     })
     .catch((err) =>{
         console.log(err);
@@ -159,7 +159,7 @@ exports.review_delete_post = (req, res) =>{
     console.log(req.body.id);
     Review.findByIdAndDelete(req.body.id)
     .then(() =>{
-        res.redirect('/event/index');
+        res.redirect("/event/detail?id="+req.body.eventId)
     })
     .catch((err) =>{
         console.log(err);
