@@ -39,6 +39,7 @@ app.use((req, res, next) =>{
     res.locals.user = req.user;
     next();
 })
+
 // Import Routes
 const indexRouter = require("./routes/index");
 const eventRouter = require("./routes/event");
