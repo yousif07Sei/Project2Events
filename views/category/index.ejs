@@ -1,4 +1,11 @@
-<h1>Categories</h1>
+<div class="container-fluid d-flex justify-content-between align-items-center">
+    <h1 class="mb-5">Categories</h1>
+    <% if(user){
+        if(user.type == "admin"){
+    %>
+            <a href="/category/add"><button type="button" class="btn btn-secondary fs-5 justify-content-end bi bi-plus"></button></a>
+    <% }} %>
+</div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <% categories.forEach(function(category) {%>

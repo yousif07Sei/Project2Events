@@ -1,44 +1,48 @@
-<h1> Edit Event </h1>
 
-<form method="POST" action="/event/update">
-    <div>
-      <label>Name</label>
-      <input type="text" name="name" class="form-control" value="<%= event.name  %>" />
-    </div>
-       <label>Description</label>
-      <input type="text" name="description" class="form-control" value="<%=event.description %>" />
-    <div>
+<div class="row g-5">
+  <div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Edit Event</h4>
+    <form method="POST" action="/event/update">
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" id="name" value="<%= event.name  %>">
+        </div>
+
+        <div class="col-12">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" name="description" class="form-control" id="description" value="<%=event.description %>">
+        </div>
+
+
+        <div class="col-sm-6">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input type="date" name="startDate" id="startDate" class="form-control" value="<%= dayjs(event.startDate).format('YYYY-MM-DD')  %>" />
+        </div>
       
-    </div>
-  
-    <div>
-      <label>Start Date</label>
-      <input type="date" name="startDate" class="form-control" value="<%= dayjs(event.startDate).format('YYYY-MM-DD')  %>" />
-    </div>
-  
-    <div>
-      <label>End Date</label>
-      <input type="date" name="endDate" class="form-control" value="<%= dayjs(event.EndDate).format('YYYY-MM-DD')  %>" />
-    </div>
-  
-    <div>
-      <label>time</label>
-      <input type="time" name="time" class="form-control" value="<%=event.time  %>" />
-    </div>
+        <div class="col-sm-6">
+          <label for="endDate" class="form-label">End Date</label>
+          <input type="date" name="endDate" id="endDate" class="form-control" value="<%= dayjs(event.EndDate).format('YYYY-MM-DD')  %>" />
+        </div>
 
-    <div>
-        <label>Image</label>
-        <input type="text" name="image" class="form-control" value="<%=event.image  %>" />
-    </div>
+        <div class="col-sm-6">
+          <label for="time" class="form-label">time</label>
+          <input type="time" name="time" id="time" class="form-control" value="<%=event.time  %>" />
+        </div>
 
-    <div>
-        <label>Location</label>
-        <input type="text" name="location" class="form-control" value="<%=event.location  %>" />
-    </div>
-   
-    <div>
-        <label>Category</label>
-        <select name="category[]" class="form-select" multiple>
+        <div class="col-12">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" name="location" id="location" class="form-control" value="<%=event.location  %>" />
+      </div>
+
+      <div class="col-12">
+        <label for="image" class="form-label">Image</label>
+        <input type="text" name="image" id="image" class="form-control" value="<%=event.image  %>" />
+      </div>
+
+      <div class="col-sm-6">
+        <label for="category">Category</label>
+        <select name="category[]" id="category" class="form-select" multiple='true'>
           <option>Select a Category</option>
           <% categories.forEach(function(category) { %>
             <% const isSelected = event.category.some(c => c.equals(category._id)); %>
@@ -46,6 +50,15 @@
           <% }); %>
       </select>
     </div>
-    <input type="hidden" name="id" value="<%= event._id  %>"/>
-    <button type="submit" class="btn btn-primary">Update Event</button>
-  </form>
+
+      <hr class="my-4">
+
+      <input type="hidden" name="id" value="<%= event._id  %>"/>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Update Event</button>
+        <a href="/event/index"><button type="button" class="btn btn-secondary">Cancle</button></a>
+      </div> 
+    </form>
+  </div>
+</div>
+
