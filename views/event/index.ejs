@@ -48,7 +48,7 @@
                 <% }} %>
 
 
-            <% if (!user) { %>
+            <% if (!user || user.type == "user") { %>
                 <a href="/event/detail?id=<%= event._id %>"><button type="button" class="btn btn-outline-secondary w-100 ">View</button></a>
 
                 <% } %>

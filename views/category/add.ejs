@@ -1,6 +1,6 @@
 <h1 class="mb-5">Add Category</h1>
 
-<form method="POST" action="/category/add">
+<form method="POST" action="/category/add" enctype="multipart/form-data">
 <!-- <div>
     <label for="categoryName">Category Name:</label>
     <input type="text" name="name" id="categoryName" class="form-control mb-3">
@@ -11,6 +11,11 @@
         </div>
         <div class="col-auto">
             <input type="text" id="categoryName" name="name" class="form-control">
+        </div>
+        <br><br>
+        <div class="col-auto">
+            <label>Category Image:</label>
+            <input type="file" name="image" accept="image/png, image/jpeg, image/jpg" />
         </div>
     </div>
 <button  type="submit" class="btn btn-danger">Add</button>
