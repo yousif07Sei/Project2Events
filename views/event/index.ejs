@@ -47,8 +47,10 @@
                     <p class="d-flex text-size text-body-tertiary">Modified <%= dayjs(event.updated).fromNow(true) %> ago</p>
                 <% }} %>
 
+
             <% if (!user) { %>
                 <a href="/event/detail?id=<%= event._id %>"><button type="button" class="btn btn-outline-secondary w-100 ">View</button></a>
+
                 <% } %>
                 <div class="d-flex justify-content-between align-items-center">
                     <% if(user){
