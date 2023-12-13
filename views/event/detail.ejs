@@ -1,27 +1,33 @@
-<h2><%= event.name %></h2>
+<section class="text-center">
+<h1><%= event.name %></h1>
 
-<div>
-    Description: <%= event.description  %>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <% for(let i = 0; i < event.image.length; i++) { %>
+            <div class="carousel-item <% if(i == 0){ %>active<% } %>" >
+                <img class="w-50 h-100 img-fluid event-img" src="<%= event.image[i] %>" alt="Current Event Image">
+            </div>
+            <% } %>
+        </div>
+      </div>
+
+
+<div class="mb-5">
+    <p class="event-desc"><%= event.description %></p>
 </div>
 
-<div>
-    Start Date: <%= dayjs(event.startDate).format('MM/DD/YYYY') %>
-</div>
-
-<div>
-    End Date: <%= dayjs(event.endDate).format('MM/DD/YYYY') %>
-</div>
-
-<div>
-    Time: <%= event.time  %>
-</div>
-
-<% for(let i = 0; i < event.image.length; i++) { %>
-    <div>
-        <img src="<%= event.image[i] %>" alt="Current Event Image" width="100">
+<div class="row mb-5" >
+    <div class="col-6">
+        Start Date: <%= dayjs(event.startDate).format('MM/DD/YYYY') %>
     </div>
-<% } %>
 
+    <div class="col-6">
+        End Date: <%= dayjs(event.endDate).format('MM/DD/YYYY') %>
+    </div>
+</div>
+    <div>
+        Time: <%= event.time  %>
+    </div>
 <div>
     Location: <%= event.location  %>
 </div>
@@ -37,7 +43,15 @@ if(review.length != 0){ %>
 <% review.forEach(review =>{ 
     // The loop is to go for all users in this review page and if the user have written a review he can edit or delete the review
     review.user.forEach(reviewUser =>{ %>
-        <%= reviewUser.name %> <br>
+        <div class="card mb-3 rounded text-center card-comment" style="max-width: 400px;">
+            <div class="row g-0 align-items-center">
+                <div class="col-4 d-flex justify-content-center">
+                    <img src="<%= reviewUser.avatar %>" class="img-fluid rounded-circle" style="width: 35%;" alt="...">
+                </div>
+                <div class="col-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= reviewUser.name %></h5>
+
         <%
         // If the user is logged in
         if(user){%> 
@@ -58,11 +72,15 @@ if(review.length != 0){ %>
                 <button>Delete</button>
             </form>
         <% }else{ %>
-            <%= review.comment %> <hr>
+            <%= review.comment %>
         <%}
     }else{ %>
-        <%= review.comment %> <hr>
+        <%= review.comment %>
         <% } %>
+                            </div>
+                </div>
+            </div>
+        </div>
     <% }) %>
 <% }) // If there is no reviews 
 }else{%>
@@ -88,3 +106,6 @@ if(review.length != 0){ %>
     <button type="submit">Comment</button>
 </form>
 <%}}%>
+
+</section>
+
