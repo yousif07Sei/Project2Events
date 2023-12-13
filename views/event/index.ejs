@@ -10,11 +10,11 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <% events.forEach(event => {%>
     <div class="col">
-      <div class="card shadow-sm">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        <div class="card-body">
-            <p class="text-body-secondary"><%= event.category.map(c => c.name).join(', ')%></p>
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+                <p class="text-body-secondary"><%= event.category.map(c => c.name).join(', ')%></p>
+                <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title"><%= event.name %></h5>
                     <p class="text-body-tertiary text-size"><%= dayjs(event.startDate).format('MM/DD/YYYY') %> - <%= dayjs(event.endDate).format('MM/DD/YYYY') %></p>
                 </div>
@@ -28,13 +28,13 @@
                     <p class="d-flex text-size text-body-tertiary">Modified <%= dayjs(event.updated).fromNow(true) %> ago</p>
                 <% }} %>
 
-            <% if (!user) { %>
-                <a href="/category/detail?id=<%= event._id %>"><button type="button" class="btn btn-outline-secondary w-100 ">View</button></a>
+                <% if (!user) { %>
+                    <a href="/category/detail?id=<%= event._id %>"><button type="button" class="btn btn-outline-secondary w-100 ">View</button></a>
                 <% } %>
-            <div class="d-flex justify-content-between align-items-center">
-                <% if(user){
-                    if(user.type == "admin"){
-                %>
+                <div class="d-flex justify-content-between align-items-center">
+                    <% if(user){
+                        if(user.type == "admin"){
+                    %>
                 <div class="btn-group" role="group">
                             <a href="/event/detail?id=<%= event._id %>"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                             <a href='/event/edit?id=<%= event._id %>'><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
@@ -43,7 +43,7 @@
                 <% }} %>
             </div>
         </div>
-      </div>
+        </div>
     </div>
     <% }); %>
 </div>
