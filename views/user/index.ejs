@@ -1,0 +1,29 @@
+<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+    <% users.forEach(function(user) { %>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= user.name %></h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary"><%= user.email %></h6>
+                        <form method="POST" action="/user/updateType">
+                            <input type="hidden" name="id" value="<%= user._id  %>"/>
+                            <label for="type" class="form-label"></label>
+                            <div class="form-check">
+                            <input class="form-check-input" type="radio" value="admin" name="userType" id="adminRadio" <%= user.type === 'admin' ? 'checked' : '' %>>
+                            <label class="form-check-label" for="adminRadio">
+                                admin
+                            </label>
+                        </div>
+                        <div class="form-check" >
+                            <input class="form-check-input" type="radio" value="user" name="userType" id="userRadio" <%= user.type === 'user' ? 'checked' : '' %>>
+                            <label class="form-check-label" for="userRadio">
+                                user
+                            </label>
+                        </div>
+                            <button type="submit" class="btn btn-secondary">update type</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    <% }); %>
+</div>

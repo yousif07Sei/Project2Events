@@ -38,4 +38,25 @@ else{
 }
 }
 
+exports.user_index_get =  (req, res) =>{  
+    User.find()
+    .then((users) => {
+        res.render("user/index", {users});
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+exports.user_edit_type_post =  (req, res) =>{  
+    console.log(req.body.id);
+
+    User.findByIdAndUpdate(req.body.id, {type: req.body.userType})
+    .then(() => {
+        res.redirect('/user/index');
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
  
