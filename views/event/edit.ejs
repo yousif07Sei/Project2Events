@@ -2,7 +2,7 @@
 <div class="row g-5">
   <div class="col-md-7 col-lg-8">
     <h4 class="mb-3">Edit Event</h4>
-    <form method="POST" action="/event/update">
+    <form method="POST" action="/event/update" enctype="multipart/form-data">
       <div class="row g-3">
         <div class="col-12">
           <label for="name" class="form-label">Name</label>
@@ -28,6 +28,20 @@
         <div class="col-sm-6">
           <label for="time" class="form-label">time</label>
           <input type="time" name="time" id="time" class="form-control" value="<%=event.time  %>" />
+        </div>
+        <div class="col-sm-6">
+          <label>Current Event images:</label><br><br>
+          <% for(let i = 0; i < event.image.length; i++) { %>
+            <div>
+                <img src="<%= event.image[i] %>" alt="Current Event Image" width="100"><br><br>
+            </div>
+        <% } %>
+        
+      </div>
+    <br>
+      <div class="col-sm-6">
+          <label>New Event image:</label>
+          <input type="file" name="image" class="form-control" accept="image/png, image/jpeg, image/jpg" multiple />
         </div>
 
         <div class="col-12">
