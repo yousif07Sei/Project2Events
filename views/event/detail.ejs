@@ -1,6 +1,18 @@
 <section class="text-center">
 <h1><%= event.name %></h1>
 
+<div>
+    <p class="event-p">Category: <%= event.category.map(c => c.name).join(', ')%></p>
+</div>
+<p class="event-p"><%= dayjs(event.startDate).format('MM/DD/YYYY') %> - <%= dayjs(event.endDate).format('MM/DD/YYYY') %></p>
+
+    <div>
+        <p class="event-p">Time: <%= event.time  %></p>
+    </div>
+<div>
+    <p class="event-p">Location: <%= event.location  %></p>
+</div>
+
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <% for(let i = 0; i < event.image.length; i++) { %>
@@ -16,25 +28,6 @@
     <p class="event-desc"><%= event.description %></p>
 </div>
 
-<div class="row mb-5" >
-    <div class="col-6">
-        Start Date: <%= dayjs(event.startDate).format('MM/DD/YYYY') %>
-    </div>
-
-    <div class="col-6">
-        End Date: <%= dayjs(event.endDate).format('MM/DD/YYYY') %>
-    </div>
-</div>
-    <div>
-        Time: <%= event.time  %>
-    </div>
-<div>
-    Location: <%= event.location  %>
-</div>
-
-<div>
-    Category: <%= event.category.map(c => c.name).join(', ')%>
-</div>
 <br>
 <% let count = 0;
 // If the review for this event is not empty 
@@ -43,10 +36,10 @@ if(review.length != 0){ %>
 <% review.forEach(review =>{ 
     // The loop is to go for all users in this review page and if the user have written a review he can edit or delete the review
     review.user.forEach(reviewUser =>{ %>
-        <div class="card mb-3 rounded text-center card-comment" style="max-width: 400px;">
+        <div class="card mb-3 rounded text-center card-comment" style="max-width: 700px;">
             <div class="row g-0 align-items-center">
                 <div class="col-4 d-flex justify-content-center">
-                    <img src="<%= reviewUser.avatar %>" class="img-fluid rounded-circle" style="width: 35%;" alt="...">
+                    <img src="<%= reviewUser.avatar %>" class="img-fluid" style="width: 30%; border-radius: 50%;" alt="...">
                 </div>
                 <div class="col-8">
                     <div class="card-body">
@@ -60,17 +53,20 @@ if(review.length != 0){ %>
                 // The form to edit or delete the review if he user has one
 
                 %>
-            <form method="POST" action="review/edit">
-                <input type="text" name="comment" value="<%= review.comment %>">
-                <input name="id" value="<%= review._id %>" type="hidden">
-                <input type="hidden" name="eventId" value="<%= event._id %>">
-                <button>Edit</button> 
-            </form>
-            <form method="POST" action="review/delete">
-                <input type="hidden" name="id" value="<%= review._id %>" >
-                <input type="hidden" name="eventId" value="<%= event._id %>">
-                <button>Delete</button>
-            </form>
+                <div class="">
+    <form method="POST" action="review/edit">
+        <input type="text" name="comment" value="<%= review.comment %>">
+        <input name="id" value="<%= review._id %>" type="hidden">
+        <input type="hidden" name="eventId" value="<%= event._id %>">
+        <button class="btn btn-secondary">Edit</button> 
+    </form>
+    <form method="POST" action="review/delete">
+        <input type="hidden" name="id" value="<%= review._id %>" >
+        <input type="hidden" name="eventId" value="<%= event._id %>">
+        <button class="btn btn-secondary">Delete</button>
+    </form>
+</div>
+
         <% }else{ %>
             <%= review.comment %>
         <%}

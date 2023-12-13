@@ -9,12 +9,9 @@ const upload = require('../config/multerConfig');
 
 router.use(express.urlencoded({extended: true}));
 
-// router.get('/add', isLoggedInAdmin, categoryCtrl.category_add_get);
+router.get('/add', isLoggedInAdmin, categoryCtrl.category_add_get);
 
-// router.post('/add', isLoggedInAdmin, categoryCtrl.category_add_post);
-router.get('/add', categoryCtrl.category_add_get);
-
-router.post('/add', upload.single('image') ,categoryCtrl.category_add_post);
+router.post('/add', isLoggedInAdmin, upload.single('image') , categoryCtrl.category_add_post);
 
 router.get('/index', categoryCtrl.category_index_get);
 

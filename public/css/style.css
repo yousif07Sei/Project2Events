@@ -73,8 +73,13 @@ body {
     margin: 0 auto;
     font-size: 25px;
     width: 70%;
+    text-align: justify;
   }
 
   .event-img {
-    padding: 50px 0;
+    padding: 40px 0;
+  }
+
+  .event-p {
+    font-size: 20px;
   }

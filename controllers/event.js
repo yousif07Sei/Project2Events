@@ -132,7 +132,7 @@ exports.event_edit_get = (req, res)=>{
 exports.event_edit_post = async (req, res)=>{
 console.log(req.files)
 console.log(req.body)
-    if(req.files){
+    if(req.files.length != 0){
         console.log("in")
         let images;
         let pathDb = [];
