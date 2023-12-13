@@ -39,16 +39,20 @@ app.use((req, res, next) =>{
     res.locals.user = req.user;
     next();
 })
+
 // Import Routes
 const indexRouter = require("./routes/index");
 const eventRouter = require("./routes/event");
-const categoryRouter = require("./routes/category")
+const categoryRouter = require("./routes/category");
+const userRouter = require('./routes/user');
 
 
 //------- Mount routes -------//
 app.use("/", indexRouter);
 app.use("/event", eventRouter);
 app.use("/category", categoryRouter);
+app.use("/user", userRouter);
+
 
 
 // link you static folder i.e. images, css 

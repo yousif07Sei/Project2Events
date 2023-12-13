@@ -1,8 +1,18 @@
-<h1>Add Category</h1>
+<h1 class="mb-5">Add Category</h1>
+
 <form method="POST" action="/category/add">
-<div>
+<!-- <div>
     <label for="categoryName">Category Name:</label>
     <input type="text" name="name" id="categoryName" class="form-control mb-3">
-</div>
-<button  type="submit" class="btn btn-primary">Add</button>
+</div> -->
+    <div class="row g-3 align-items-center mb-4">
+        <div class="col-auto">
+            <label for="categoryName" class="col-form-label text-body-secondary">Category Name</label>
+        </div>
+        <div class="col-auto">
+            <input type="text" id="categoryName" name="name" class="form-control">
+        </div>
+    </div>
+<button  type="submit" class="btn btn-danger">Add</button>
+<a href="/category/index"><button  type="button" class="btn btn-secondary">Cancle</button></a>
 </form>

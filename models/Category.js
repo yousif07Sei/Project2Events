@@ -6,6 +6,7 @@ const categorySchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
     }],
+    image: String
 },{
     timestamps: true
 });

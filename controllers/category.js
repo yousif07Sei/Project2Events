@@ -1,6 +1,7 @@
 const {Category} = require('../models/Category');
 const {Event} = require('../models/Event');
 const dayjs = require('dayjs')
+const uploadCloudinary = require('../config/cloudinaryConfig');
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
@@ -8,8 +9,18 @@ exports.category_add_get = (req, res) =>{
     res.render('category/add');
 }
 
-exports.category_add_post = (req, res) =>{
-    let category = new Category(req.body)
+exports.category_add_post = async (req, res) =>{    
+    let category = new Category(req.body);
+    console.log(req.file);
+    let image = `public/images/${req.file.filename}`;
+    await uploadCloudinary.upload_single(image)
+    .then((imagePath) =>{
+        console.log(imagePath.url)
+        category.image = imagePath.url;
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
     category.save()
     .then(() =>{
         res.redirect("/category/index")
@@ -64,14 +75,51 @@ exports.category_edit_get = (req,res) => {
     })
 }
 
-exports.category_update_post = (req,res) => {
+// exports.category_update_post = (req,res) => {
+//     console.log(req.body.id);
+//     console.log(req.file)
+    
+//     // find req.body.id and update req.body
+//     Category.findByIdAndUpdate(req.body.id, req.body)
+//     .then(() => {
+//         res.redirect('/category/index');
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
+// }
+
+exports.category_update_post = async (req, res) => {
     console.log(req.body.id);
-    // find req.body.id and update req.body
-    Category.findByIdAndUpdate(req.body.id, req.body)
-    .then(() => {
-        res.redirect('/category/index');
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
+    // Check if a new image was uploaded
+    if (req.file) {
+        let image = `public/images/${req.file.filename}`;
+        uploadCloudinary.upload_single(image)
+        .then((imagePath) =>{
+            console.log(imagePath.url)
+            console.log(req.body)
+            const updateFields = {name: req.body.name, image: imagePath.url};
+            Category.findByIdAndUpdate(req.body.id, updateFields)
+            .then(() => {
+                res.redirect('/category/index');
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            });        })
+        .catch((err) =>{
+            console.log(err);
+        })    
+    }
+    else{
+        Category.findByIdAndUpdate(req.body.id, req.body)
+        .then(() => {
+            res.redirect('/category/index');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+    }
+    // Update the category with the new information
+};
