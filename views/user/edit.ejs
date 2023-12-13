@@ -1,0 +1,24 @@
+<h1>Edit User</h1>
+
+<form method="POST" action="/user/update" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<%= user._id %>">
+    <div>
+        <label>Name:</label>
+        <input type="text" name="name" value="<%= user.name %>">
+    </div>
+    <div>
+        <label>Email:</label>
+        <input type="email" name="name" value="<%= user.email %>" disabled>
+    </div>
+    <br>
+    <div>
+        <label>Current Avatar:</label>
+        <img src="<%= user.avatar %>" alt="Current Avatar Image" width="100">
+    </div>
+<br>
+    <div>
+        <label>New Avatar image:</label>
+        <input type="file" name="avatar" accept="image/png, image/jpeg, image/jpg" />
+    </div>
+    <button type="submit">Update Category</button>
+</form>
