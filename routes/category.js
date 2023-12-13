@@ -5,18 +5,7 @@ const router = express.Router();
 // Require category controller
 const categoryCtrl = require('../controllers/category');
 const isLoggedInAdmin = require('../config/isLoggedInAdmin');
-
-const multer  = require('multer')
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/images')
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, uniqueSuffix  + '-' + file.originalname )
-    }
-})
-const upload = multer({ storage: storage })
+const upload = require('../config/multerConfig');
 
 router.use(express.urlencoded({extended: true}));
 
