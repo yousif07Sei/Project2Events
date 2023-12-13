@@ -123,14 +123,44 @@ exports.event_edit_get = (req, res)=>{
     })
 }
 
-exports.event_edit_post = (req, res)=>{
-    Event.findByIdAndUpdate(req.body.id, req.body)
-    .then(()=>{
-      res.redirect('/event/index')
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+exports.event_edit_post = async (req, res)=>{
+console.log(req.files)
+console.log(req.body)
+    if(req.files){
+        console.log("in")
+        let images;
+        let pathDb = [];
+        images = req.files.map(file => `public/images/${file.filename}`);
+        await uploadCloudinary.upload_multiple(images)
+        .then((imagesPath) =>{
+            imagesPath.forEach(pathImg =>{
+                console.log(pathImg.url)
+                pathDb.push(pathImg.url);
+            })
+            const body = req.body;
+            body.image = pathDb
+            Event.findByIdAndUpdate(req.body.id, body)
+            .then(() => {
+                res.redirect('/event/index');
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            });
+        })
+        .catch((err) =>{
+            console.log(err);
+        })    
+    }
+    else{
+        Event.findByIdAndUpdate(req.body.id, req.body)
+        .then(()=>{
+            res.redirect('/event/index')
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+        }    
     }
 
     exports.event_review_post = (req, res) =>{
@@ -146,6 +176,7 @@ exports.event_edit_post = (req, res)=>{
     }
 
 exports.review_edit_post = (req, res) =>{
+    console.log(req.body.id)
     Review.findByIdAndUpdate(req.body.id, req.body)
     .then(() =>{
         res.redirect("/event/detail?id="+req.body.eventId)
@@ -165,3 +196,8 @@ exports.review_delete_post = (req, res) =>{
         console.log(err);
     })
 }
+
+// exports.img_delete_post = (req, res) =>{
+//     console.log(req.query.id)
+//     console.log(req.body.id)
+// }
