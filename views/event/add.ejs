@@ -4,7 +4,7 @@
 <div class="row g-5">
   <div class="col-md-7 col-lg-8">
     <h4 class="mb-3">Add Event</h4>
-    <form method="POST" action="/event/add">
+    <form method="POST" action="/event/add" enctype="multipart/form-data">
       <div class="row g-3">
         <div class="col-12">
           <label for="name" class="form-label">Name</label>
@@ -37,10 +37,7 @@
           <input type="text" name="location" id="location" class="form-control" required>
       </div>
 
-      <div class="col-12">
-        <label for="image" class="form-label">Image</label>
-        <input type="text" name="image" id="image" class="form-control">
-      </div>
+    
 
       <div class="col-sm-6">
         <label for="category">Category</label>
