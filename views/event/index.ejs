@@ -1,47 +1,49 @@
-<h1>Events</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Time</th>
-        <th>Image</th>
-        <th>Location</th>
-        <th>Category</th>
-        <% if(user){
-            if(user.type == "admin"){
-        %>
-        <th>Created At</th>
-        <th>Updated At</th>
-        <th>Delete</th>
-        <th>Edit</th>
-        <% }} %>
-    </tr>
+<div class="container-fluid d-flex justify-content-between align-items-center">
+    <h1 class="mb-5">Events</h1>
+    <% if(user){
+        if(user.type == "admin"){
+    %>
+            <a href="/event/add"><button type="button" class="btn btn-secondary fs-5 justify-content-end bi bi-plus"></button></a>
+    <% }} %>
+</div>
 
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <% events.forEach(event => {%>
-         <tr>
-            <td>
-                <a href="/event/detail?id=<%= event._id  %>">
-                <%= event.name  %>
-            </a>
-            </td>
-            <td><%= event.description  %></td>
-            <td><%= dayjs(event.startDate).format('MM/DD/YYYY')  %></td>
-            <td><%=dayjs(event.endDate).format('MM/DD/YYYY')  %></td>
-            <td><%= event.time  %></td>
-            <td><%= event.image  %></td>
-            <td><%= event.location  %></td>
-            <td><%= event.category.map(c => c.name).join(', ')%></td>
-            <% if(user){
-                if(user.type == "admin"){
-            %>
-            <td>created <%= dayjs(event.createdAt).fromNow(true) %> ago</td>
-            <td>updated <%= dayjs(event.updated).fromNow(true) %> ago</td>
-            <td><a href="/event/delete?id=<%= event._id %>" class="btn btn-danger bi bi-trash3"></a></td>
-            <td><a href="/event/edit?id=<%= event._id %>" class="btn btn-secondary bi bi-pencil"></a></td>
-            <% }} %>
-         </tr>
-        
+    <div class="col">
+      <div class="card shadow-sm">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        <div class="card-body">
+            <p class="text-body-secondary"><%= event.category.map(c => c.name).join(', ')%></p>
+            <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title"><%= event.name %></h5>
+                    <p class="text-body-tertiary text-size"><%= dayjs(event.startDate).format('MM/DD/YYYY') %> - <%= dayjs(event.endDate).format('MM/DD/YYYY') %></p>
+                </div>
+                <div>
+                    <p class="card-text"><%= event.description %></p>
+                    <p>Opening Time: <%= event.time %></p>
+                    <p>Location: <%= event.location %></p>
+                </div>
+                <% if (user) { %>
+                    <% if (user.type == "admin"){ %>
+                    <p class="d-flex text-size text-body-tertiary">Modified <%= dayjs(event.updated).fromNow(true) %> ago</p>
+                <% }} %>
+
+            <% if (!user) { %>
+                <a href="/category/detail?id=<%= event._id %>"><button type="button" class="btn btn-outline-secondary w-100 ">View</button></a>
+                <% } %>
+            <div class="d-flex justify-content-between align-items-center">
+                <% if(user){
+                    if(user.type == "admin"){
+                %>
+                <div class="btn-group" role="group">
+                            <a href="/event/detail?id=<%= event._id %>"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                            <a href='/event/edit?id=<%= event._id %>'><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                </div>
+                    <a href="/event/delete?id=<%= event._id %>"><button class="btn btn-danger btn-sm bi bi-trash3"></button></a>
+                <% }} %>
+            </div>
+        </div>
+      </div>
+    </div>
     <% }); %>
-</table>
+</div>
