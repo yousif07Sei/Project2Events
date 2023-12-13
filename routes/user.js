@@ -10,4 +10,8 @@ const upload = require('../config/multerConfig');
 router.get('/edit', isLoggedInAdmin, userCtrl.user_edit_get);
 router.post('/update', isLoggedInAdmin,upload.single('avatar'), userCtrl.user_edit_post);
 
+router.get('/index', isLoggedInAdmin, userCtrl.user_index_get);
+
+router.post('/updateType', isLoggedInAdmin, userCtrl.user_edit_type_post);
+
 module.exports = router;
